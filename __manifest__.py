@@ -39,7 +39,8 @@
     'data': [
         #'data/pe.datas.csv',
         'security/pe_cpe_security.xml',
-        'security/ir.model.access.csv',        
+        'security/ir.model.access.csv', 
+        'data/pe.datas.catalog59.xml',       
         'views/account_invoice_view.xml',
         'views/pe_cpe_view.xml',
         'views/account_view.xml',
@@ -51,8 +52,7 @@
         'views/pe_cpe_template.xml',
         'data/pe_cpe_data.xml',
         'data/invoice_data_action.xml',
-        'views/res_config_setting_view.xml',
-        'data/pe.datas.catalog59.xml',
+        'views/res_config_setting_view.xml',        
     ],
     
     # only loaded in demonstration mode

@@ -542,6 +542,7 @@ class CPE:
 
         taxInclusiveAmountTag = etree.QName(self._cbc, 'TaxInclusiveAmount')
         taxInclusiveAmount = etree.SubElement( total, taxInclusiveAmountTag.text, currencyID=invoice_id.currency_id.name, nsmap={'cbc': taxInclusiveAmountTag.namespace} )
+        raise UserError(float(self.get_tax_amount(invoice_id)))
         totalInclusiveAmount = float(sumLineExtensionAmount) + float(self.get_tax_amount(invoice_id))
         taxInclusiveAmount.text = str(round(totalInclusiveAmount, 2))
 
@@ -562,7 +563,7 @@ class CPE:
                                                                                     product=line.product_id,
                                                                                     partner=invoice_id.partner_id)
 
-            tax_total_amount = taxes.get('total_included', 0.0) - taxes.get('total_excluded', 0.0)
+            tax_total_amount =  ( float(tax_total_amount) ) + ( float( taxes.get('total_included', 0.0) ) - float( taxes.get('total_excluded', 0.0) ) )
         return tax_total_amount
 
     def _getPaymentMeans21( self, invoice_id ):
