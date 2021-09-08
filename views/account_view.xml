@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_tax_form">
+        <field name="name">account.tax.form.inherit.l10n.pe.sunat</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[1]/group" position="after">
+              <group name="peruvian_settings" string="Peruvian Settings" >
+                  <group>
+                      <field name="pe_tax_type" widget="selection" groups="l10n_pe_cpe.group_pe_cpe_manager"/>
+                      <field name="pe_tax_code" invisible='True' groups="l10n_pe_cpe.group_pe_cpe_manager"/>
+                      <field name="pe_tier_range" attrs="{'invisible':[('pe_tax_code','!=', '2000')]}" groups="l10n_pe_cpe.group_pe_cpe_manager"/>
+                  </group>
+              </group>
+          </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_journal_form">
+        <field name="name">account.journal.form.inherit.l10n.pe.sunat</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="l10n_pe_invoice.view_account_journal_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='credit_note_id']" position="before">
+            <field name="is_cpe" groups="l10n_pe_cpe.group_pe_cpe_manager" attrs="{'invisible':[('type','not in',['sale'])]}" />
+            <field name="is_synchronous" attrs="{'invisible': [('is_cpe', '=', False)]}" groups="l10n_pe_cpe.group_pe_cpe_manager" />
+            <!--field name="is_homologation" attrs="{'invisible': ['|',('is_cpe', '=', False),('pe_invoice_code', 'not in', ('03'))]}" groups="l10n_pe_cpe.group_pe_cpe_manager" /-->
+          </xpath>
+        </field>
+    </record>
+
+</odoo>

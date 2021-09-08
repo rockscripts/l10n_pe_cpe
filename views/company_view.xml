@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+	<record model="ir.ui.view" id="view_company_form">
+        <field name="name">res.company.form.inherit.l10n.pe.cpe</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="l10n_pe_invoice.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sunat_amount']" position="after">
+              <field name="pe_is_sync" groups="l10n_pe_cpe.group_pe_cpe_manager" />
+       		  <field name="sunat_resolution_type" />
+       		  <field name="sunat_resolution_number" />
+       		  <field name="pe_certificate_id" options="{'no_create': True}" groups="l10n_pe_cpe.group_pe_cpe_manager" />
+       		  <field name="pe_cpe_server_id" options="{'no_create': True}" groups="l10n_pe_cpe.group_pe_cpe_manager" />
+	        </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

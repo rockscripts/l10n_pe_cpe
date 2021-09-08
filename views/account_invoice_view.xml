@@ -1,0 +1,107 @@
+<odoo>
+  <data>
+	<record id="invoice_view_form" model="ir.ui.view">
+       <field name="name">account.invoice.peruvian.inherit.form</field>
+       <field name="model">account.invoice</field>
+       <field name="inherit_id" ref="account.invoice_form"/>
+       <field name="arch" type="xml">
+       	    <xpath expr="//field[@name='partner_id']" position="attributes" >
+                <attribute name="context">{'search_default_customer':1, 'show_address': 1, 'default_company_type': 'company','force_pe_journal':True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+          	    <field name="sunat_payment_means_code"/>
+                <field name="sunat_payment_means_id" invisible='1'/>
+           </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+          	  <field name="pe_sunat_transaction" attrs="{'invisible':True}" />
+              <field name="pe_sunat_transaction51" attrs="{'invisible':[('is_cpe','=',False)]}" />
+              
+              <field name="pe_response" attrs="{'invisible':[('is_cpe','=',False),('state', 'not in', ('draft'))]}" />
+              <field name="pe_license_plate" groups="l10n_pe_cpe.group_plate_invoice" />
+           </xpath>
+          <!-- xpath expr="//field[@name='comment']" position="before">
+              <div>
+                   <label for="discount_type" string="Discount Type :" 
+                    groups="l10n_pe_cpe.group_pe_cpe_manager"/>
+                   <field name="discount_type" class="oe_inline" 
+                    groups="l10n_pe_cpe.group_pe_cpe_manager" />
+               </div>
+               <div>
+                   <label for="discount_rate" string="Discount Amount :" attrs="{'invisible': [('discount_type', 'not in', ['amount', ''])]}" 
+                    groups="l10n_pe_cpe.group_pe_cpe_manager" />
+                   <field name="amount_rate" class="oe_inline" attrs="{'invisible': [('discount_type', 'not in', ['amount', ''])]}" 
+                    groups="l10n_pe_cpe.group_pe_cpe_manager" />
+                 <label for="discount_rate" string="Discount Rate :" attrs="{'invisible': [('discount_type', 'not in', ['percent', ''])]}" 
+                  groups="l10n_pe_cpe.group_pe_cpe_manager" />
+                 <field name="discount_rate" class="oe_inline" attrs="{'invisible': [('discount_type', 'not in', ['percent', ''])]}" 
+                  groups="l10n_pe_cpe.group_pe_cpe_manager"/>
+               </div>
+          </xpath -->
+           <xpath expr="//field[@name='discount']" position="after">
+           		<field name="pe_license_plate" groups="l10n_pe_cpe.group_plate_invoice_line" />
+           		<field name="pe_affectation_code" groups="l10n_pe_cpe.group_pe_cpe_user" required="True" />
+           </xpath>
+           <xpath expr="//page[@name='other_info']" position="after">
+           		<page string="Peruvian Customization" name="peruvian_customization" attrs="{'invisible':[('is_cpe','=',False)]}">
+           			<group>
+	           			<group>
+	           				<field name="pe_cpe_id" attrs="{'readonly':[('state', 'not in', 'draft')]}" groups="l10n_pe_cpe.group_pe_cpe_user" />
+	           				<field name="pe_summary_id" attrs="{'invisible':[('pe_invoice_code','not in',('03','07','08')),('origin_doc_code','not in',('01'))]}" readonly="True" groups="l10n_pe_cpe.group_pe_cpe_user" />
+	           				<field name="pe_voided_id" readonly="True" attrs="{'invisible':[('state','not in',('cancel'))]}"  />
+	           				<field name="pe_debit_note_code" attrs="{'invisible':[('pe_invoice_code','not in',('08'))], 'required':[('pe_invoice_code','=','08')]}"  />
+	           				<field name="pe_credit_note_code" attrs="{'invisible':[('pe_invoice_code','not in',('07'))],'required':[('pe_invoice_code','=','07')]}"  />
+	           				<field name="is_cpe" attrs="{'invisible':1}" />
+                    		<field name="pe_invoice_state" attrs="{'invisible':1}" />
+                    		<field name="internal_number" />
+	           			</group>
+	           			<group>
+	           				<field name="pe_additional_type" />
+	           				<field name="pe_additional_number" attrs="{'invisible':[('pe_additional_type','not in',['04','05', '99', '01', '02', '03'])], 'required':[('pe_additional_type','in',['04','05', '99', '01', '02', '03'])]}" />
+	           				<field name="pe_error_code" />
+	           				<field name="origin_doc_code" attrs="{'invisible':[('pe_invoice_code','not in',['07','08'])], 'required':[('pe_invoice_code','in',['07','08'])]}" />
+	           				<field name="origin_doc_number" attrs="{'invisible':[('pe_invoice_code','not in',['07','08'])], 'required':[('pe_invoice_code','in',['07','08'])]}" />
+	           				<field name="pe_invoice_code"  attrs="{'invisible':1}"  />
+	           				
+	           			</group>
+	           		</group>
+	           		<div>
+          				<label for="digest_value" string="Digest value:" />
+          				<field name="pe_digest"/>
+          			</div>
+          			<div>
+          				<label for="signature_value" string="Signature value:" />
+          			</div>
+          			<div>
+          				<field name="pe_signature"/>
+          			</div>
+	           		<field name="pe_additional_total_ids" attrs="{'readonly':[('pe_invoice_state', 'in', ['send','verify','done'])]}" >
+                    <tree editable="bottom" string="Additional Monetary Total">
+                        <field name="code"/>
+                        <field name="total_amount"/>
+                    </tree>
+                </field>
+                <field name="pe_additional_property_ids" attrs="{'readonly':[('pe_invoice_state', 'in', ['send','verify','done'])]}">
+                    <tree editable="bottom" string="Additional Property">
+                        <field name="code"/>
+                        <field name="value"/>
+                    </tree>
+                </field>
+           		</page>
+           </xpath>
+       </field>
+   </record>
+
+
+  <record id="invoice_supplier_cpe_form" model="ir.ui.view">
+       <field name="name">account.invoice.supplier.inherit.l10n.pe.cpe</field>
+       <field name="model">account.invoice</field>
+       <field name="inherit_id" ref="account.invoice_supplier_form"/>
+       <field name="arch" type="xml">
+            <xpath expr="//field[@name='discount']" position="after">
+              <field name="pe_affectation_code" invisible="True" />
+           </xpath>
+       </field>
+   </record>
+
+  </data>
+</odoo>

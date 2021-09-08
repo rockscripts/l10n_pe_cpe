@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_order_form_pe_coe">
+        <field name="name">sale.order.view.form.pe.cpe</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="pe_license_plate" groups="l10n_pe_cpe.group_plate_invoice" />
+            </xpath>
+            
+            <xpath expr="//tree//field[@name='price_unit']" position="after">
+                <field name="pe_license_plate" groups="l10n_pe_cpe.group_plate_invoice_line" />
+            </xpath>
+            
+            <xpath expr="//field[@name='order_line']/form//field[@name='customer_lead']" position="after">
+                <field name="pe_license_plate" groups="l10n_pe_cpe.group_plate_invoice_line" />
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

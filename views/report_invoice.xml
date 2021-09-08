@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_invoice_document" inherit_id="account.report_invoice_document">
+		<xpath expr="//h2" position="replace">
+			<h2>
+				<t t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid') and o.pe_doc_name">
+					<span t-field="o.pe_doc_name" />
+				</t>
+				<span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid') and not o.pe_doc_name">Invoice</span>                
+                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                <t t-if="o.type == 'out_invoice' and o.state == 'draft' and o.pe_doc_name">
+                	Draft <span t-field="o.pe_doc_name" />
+                </t>
+                <span t-if="o.type == 'out_invoice' and o.state == 'draft' and not o.pe_doc_name">Draft Invoice</span>
+                <t t-if="o.type == 'out_invoice' and o.state == 'cancel'">
+                	Cancelled <span t-field="o.pe_doc_name" />
+                </t>
+                <t t-if="o.type == 'out_invoice' and o.state == 'annul'">
+                	Annulled <span t-field="o.pe_doc_name" />
+                </t>
+                <span t-if="o.type == 'out_invoice' and o.state == 'cancel' and not o.pe_doc_name">Cancelled Invoice</span>
+                <t t-if="o.type == 'out_refund' and o.pe_doc_name" >
+                	<span t-field="o.pe_doc_name" />
+                </t>
+                <span t-if="o.type == 'out_refund' and not o.pe_doc_name">Refund</span>
+                <span t-if="o.type == 'in_refund'">Vendor Refund</span>
+                <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                <span t-field="o.number"/>
+            </h2>
+		</xpath>
+		<!--
+		<xpath expr="//span[@t-field='l.name']" position="after">
+			<t t-if="l.product_id.require_plate or l.pe_license_plate">
+                <br />Placa <span t-esc="l.pe_license_plate or o.pe_license_plate or ''"/>
+            </t>
+		</xpath>
+		-->
+		<xpath expr="//p[@t-if='o.comment']" position="before">
+	        <div class="row">
+	        	<div class="col-xs-6">
+	                <p><strong>Amount in letters: </strong> <br />
+		                <span t-field="o.amount_text"/>
+		            </p>
+		            <p t-if="o.is_cpe" ><strong>Summary: </strong> <br />
+		                <span t-field="o.pe_digest"/>
+		            </p>
+		            <t t-foreach="o.pe_additional_property_ids.filtered(lambda val: val.code != '1000')" t-as="p">
+                      <span t-field="p.value"/><br />
+                    </t>
+		        
+	            </div>
+		        <div class="col-xs-6">
+		        	<div class="col-xs-12" t-if="o.is_cpe" style="padding: 2mm">
+						<img t-if="o.sunat_qr_code" t-att-src="'data:image/png;base64,%s' %to_text(o.sunat_qr_code)" 
+						class="img-responsive center-block" style="width: 40mm;  height: 40mm;" />
+					</div>
+		        </div>
+	        </div>
+    	</xpath>
+    	
+		<xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
+			<div class="row" t-if="o.is_cpe" >
+				<p class="text-center">
+					Representacion impresa de: 
+                	<span t-field="o.pe_doc_name"/>, consulte en
+                	<span t-field="o.company_id.website"/><br />
+                	<t t-if="o.company_id.sunat_resolution_type and o.company_id.sunat_resolution_number">
+                		Autorizado mediante 
+                		<span t-field="o.company_id.sunat_resolution_type"/> N°
+                		<span t-field="o.company_id.sunat_resolution_number"/>
+                	</t>
+            	</p>
+			</div>
+    	</xpath>
+	</template>
+
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_invoice_refund_dn" model="ir.ui.view">
+            <field name="name">account.invoice.refund.debit.form</field>
+            <field name="model">account.invoice.refund</field>
+            <field name="inherit_id" ref="l10n_pe_invoice.view_account_invoice_refund_dn" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="after" >
+                  <field name="pe_debit_note_code" attrs="{'required':1}" />
+                </xpath>
+                <xpath expr="//button[@name='invoice_refund']" position="attributes" >
+                  <attribute name="context">{'is_pe_debit_note':True, 'default_pe_debit_note_code':pe_debit_note_code}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_invoice_refund" model="ir.ui.view">
+            <field name="name">account.invoice.refund.form</field>
+            <field name="model">account.invoice.refund</field>
+            <field name="inherit_id" ref="account.view_account_invoice_refund" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description']" position="after" >
+                  <field name="pe_credit_note_code" attrs="{'required':1}" />
+                </xpath>
+                <xpath expr="//button[@name='invoice_refund']" position="attributes" >
+                  <attribute name="context">{'default_pe_credit_note_code': pe_credit_note_code}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

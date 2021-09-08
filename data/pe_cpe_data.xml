@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+    	<record id="cpe_production_server" model="pe.server">
+            <field name="name">Produccion</field>
+            <field name="url">https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService</field>
+        </record>
+        <record id="cpe_homo_server" model="pe.server">
+            <field name="name">Homologacion</field>
+            <field name="url">https://www.sunat.gob.pe/ol-ti-itcpgem-sqa/billService</field>
+        </record>
+        <record id="cpe_dev_server" model="pe.server">
+            <field name="name">Desarrollo</field>
+            <field name="url">https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService</field>
+            <field name="user">MODDATOS</field>
+            <field name="password">moddatos</field>
+        </record>
+        
+        <record id="cpe_async_rc" model="ir.sequence">
+            <field name="name">Daily Summary RC</field>
+            <field name="code">pe.sunat.cpe.rc</field>
+            <field name="prefix">RC-%(year)s%(month)s%(day)s-</field>
+            <field name="implementation">no_gap</field>
+            <field name="padding">5</field>
+        </record>
+        
+        <record id="cpe_async_ra" model="ir.sequence">
+            <field name="name">Low communication RA</field>
+            <field name="code">pe.sunat.cpe.ra</field>
+            <field name="prefix">RA-%(year)s%(month)s%(day)s-</field>
+            <field name="implementation">no_gap</field>
+            <field name="padding">5</field>
+        </record>
+        
+        <record id="sync_auto_send" model="ir.cron">
+            <field name="name">Envio Automatico de Facturas/Notas</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="l10n_pe_cpe.model_pe_cpe" />
+            <field name="code">model.send_async_cpe()</field>
+            <field name="active" eval="True"/>
+        </record>
+        
+        <record id="rc_auto_send" model="ir.cron">
+            <field name="name">Envio Automatico de Resumen</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="l10n_pe_cpe.model_pe_cpe" />
+            <field name="code">model.send_rc()</field>
+            <field name="active" eval="True"/>
+        </record>
+        
+        <record id="ra_auto_send" model="ir.cron">
+            <field name="name">Envio Automatico de Baja</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="l10n_pe_cpe.model_pe_cpe" />
+            <field name="code">model.send_ra()</field>
+            <field name="active" eval="True"/>
+        </record>
+        
+        <record id="invoice_auto_send" model="ir.cron">
+            <field name="name">Envio Automatico Facturas/Boletas/Notas</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="account.model_account_invoice" />
+            <field name="code">model.action_send_mass_mail()</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_send_email" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.send.email</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="31"/>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='send_default']" position="after">
+                    <div id="config_send_email_cpe">
+                    <h2>Configuration Send Email for Document CPE</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="template_for_email_document_cpe" string="Template for email document CPE"/>
+                                <div class="text-muted">
+                                    Template for email document CPE
+                                </div>
+                                <div class="mt16">
+                                    <field name="def_template_cpe_id"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="include_ubl_attachment_in_invoice_email"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="include_ubl_attachment_in_invoice_email"/>
+                                <div class="text-muted">
+                                    Include the UBL XML in the attachments when sending the invoice by email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="only_today"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="only_today" string="only today"/>
+                                <div class="text-muted">
+                                    Only today.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="post_sunat"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="Post_send_sunat" string="Post send sunat"/>
+                                <div class="text-muted">
+                                    Post send to SUNAT.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="states_invoice" string="States Invoice"/>
+                                <div class="text-muted">
+                                    Status invoice for send to Customer
+                                </div>
+                                <div class="mt16">
+                                    <div>
+                                        <field name="state_invoice_open" class="oe_inline"/>
+                                        <label string="Invoice open" for="state_invoice_open" class="o_light_label"/>
+                                    </div>
+                                    <div>
+                                        <field name="state_invoice_in_payment" class="oe_inline"/>
+                                        <label string="Invoice In Payment" for="state_invoice_open" class="o_light_label"/>
+                                    </div>
+                                    <div>
+                                        <field name="state_invoice_paid" class="oe_inline"/>
+                                        <label string="Invoice paid" for="state_invoice_paid" class="o_light_label"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

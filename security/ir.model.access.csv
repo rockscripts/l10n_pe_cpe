@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_invoice_additional_total,access_account_invoice_additional_total,model_account_invoice_additional_total,,1,1,1,1
+access_account_invoice_additional_property,access_account_invoice_additional_property,model_account_invoice_additional_property,,1,1,1,1
+access_pe_cpe,access_pe_cpe,model_pe_cpe,,1,0,0,0
+access_pe_cpe_user,access_pe_cpe_user,model_pe_cpe,group_pe_cpe_user,1,1,1,0
+access_pe_cpe_accountant,access_pe_cpe_accountant,model_pe_cpe,group_pe_cpe_accountant,1,1,1,0
+access_pe_cpe_manager,access_pe_cpe_manager,model_pe_cpe,group_pe_cpe_manager,1,1,1,1
+access_pe_certificate_manager,access_pe_certificate_manager,l10n_pe_certificate.model_pe_certificate,group_pe_cpe_manager,1,1,1,1
+access_pe_datas_manager,access_pe_datas_manager,l10n_pe_datas.model_pe_datas,group_pe_cpe_manager,1,1,1,1
+access_pe_server_manager,access_pe_server_manager,l10n_pe_server.model_pe_server,group_pe_cpe_manager,1,1,1,1

@@ -1,0 +1,1156 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* l10n_pe_cpe
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-04 05:03+0000\n"
+"PO-Revision-Date: 2019-09-04 05:03+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_pe_cpe
+#: model:mail.template,body_html:l10n_pe_cpe.email_template_edi_invoice_cpe
+msgid "\n"
+"<p>Dear ${object.partner_id.name}\n"
+"% set access_action = object.get_access_action()\n"
+"% set access_url = access_action['type'] == 'ir.actions.act_url' and access_action['url'] or '/report/pdf/account.report_invoice/' + str(object.id)\n"
+"% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"\n"
+"% if object.partner_id.parent_id:\n"
+"    (<i>${object.partner_id.parent_id.name}</i>)\n"
+"% endif\n"
+",</p>\n"
+"<p>Here is your invoice <strong>${object.number}</strong>\n"
+"% if object.origin:\n"
+"(with reference: ${object.origin} )\n"
+"% endif\n"
+"amounting in <strong>${object.amount_total} ${object.currency_id.name}</strong>\n"
+"from ${object.company_id.name}.\n"
+"</p>\n"
+"\n"
+"% if is_online:\n"
+"    <br/><br/>\n"
+"    <center>\n"
+"      <a href=\"${access_url}\" style=\"background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;\" class=\"o_default_snippet_text\">View Invoice</a>\n"
+"    </center>\n"
+"% endif\n"
+"    <br/><br/>\n"
+"\n"
+"% if object.state=='paid':\n"
+"    <p>This invoice is already paid.</p>\n"
+"% else:\n"
+"    <p>Please remit payment at your earliest convenience.</p>\n"
+"% endif\n"
+"\n"
+"<p>Thank you,</p>\n"
+"% if object.user_id and object.user_id.signature:\n"
+"    ${object.user_id.signature | safe}\n"
+"% endif\n"
+""
+msgstr "\n"
+"Estimado ${object.partner_id.name}\n"
+"% set access_action = object.get_access_action()\n"
+"% set access_url = access_action['type'] == 'ir.actions.act_url' and access_action['url'] or '/report/pdf/account.report_invoice/' + str(object.id)\n"
+"% set is_online = access_action and access_action['type'] == 'ir.actions.act_url'\n"
+"\n"
+"% if object.partner_id.parent_id:\n"
+"(<i>${object.partner_id.parent_id.name}</i>)\n"
+"% endif\n"
+",</p>\n"
+"<p>Aqu&iacute; est&aacute; su factura <strong>${object.number}</strong>\n"
+"% if object.origin:\n"
+"(with reference: ${object.origin} )\n"
+"% endif\n"
+"por el importe de <strong>${object.amount_total} ${object.currency_id.name}</strong>\n"
+"de ${object.company_id.name}.\n"
+"</p>\n"
+"\n"
+"% if is_online:\n"
+"<br/><br/>\n"
+"<center>\n"
+"<a href=\"${access_url}\" style=\"background-color: #1abc9c; padding: 20px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 16px;\" class=\"o_default_snippet_text\">Ver factura</a>\n"
+"</center>\n"
+"% endif\n"
+"<br/><br/>\n"
+"\n"
+"% if object.state=='paid':\n"
+"<p>Esta factura ya est&aacute; pagada.</p>\n"
+"% else:\n"
+"<p>Por favor, env&iacute;enos el pago lo antes posible a su conveniencia.</p>\n"
+"% endif\n"
+"\n"
+"<p>Gracias,</p>\n"
+"% if object.user_id and object.user_id.signature:\n"
+"${object.user_id.signature | safe}\n"
+"% endif\n"
+""
+
+#. module: l10n_pe_cpe
+#: model:mail.template,subject:l10n_pe_cpe.email_template_edi_invoice_cpe
+msgid "${object.company_id.name} Invoice (Ref ${object.number or 'n/a'})"
+msgstr "${object.company_id.name} Factura (Ref ${object.number or 'n/a'})"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid ", consulte en"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "<strong>Amount in letters: </strong> <br/>"
+msgstr "<strong>Monto en letras: </strong> <br/>"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "<strong>Summary: </strong> <br/>"
+msgstr "<strong>Resumen: </strong> <br/>"
+
+#. module: l10n_pe_cpe
+#: model:res.groups,name:l10n_pe_cpe.group_pe_cpe_accountant
+msgid "Accountant"
+msgstr "Contable"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_additional_type
+msgid "Additional Document"
+msgstr "Documento adicional"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_additional_total_ids
+msgid "Additional Monetary"
+msgstr "Moneda adicional"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_invoice_additional_total
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.invoice_view_form
+msgid "Additional Monetary Total"
+msgstr "Moneda adicional total"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_additional_number
+msgid "Additional Number"
+msgstr "Número adicional"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_invoice_additional_property
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_additional_property_ids
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.invoice_view_form
+msgid "Additional Property"
+msgstr "Propiedad adicional"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Additional notes..."
+msgstr "Notas adicionales..."
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Additional notes:"
+msgstr "Notas adicional"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_company__sunat_amount
+msgid "Amount"
+msgstr "Importe"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_amount_tax
+msgid "Amount Tax"
+msgstr "Impuesto adicional"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Annulled"
+msgstr "Anulado"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Autorizado mediante"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "BOLETA ELECTRONICA"
+msgstr "BOLETA ELECTRÓNICA"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.product_template_form_pe_cpe
+msgid "Brand"
+msgstr "Marca"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Buscar"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "CARNET DE EXTRANJERIA"
+msgstr "Carnet de Extranjería"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "CED. DIPLOMATICA DE IDENTIDAD"
+msgstr "Cédula Diplomática de Identidad"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+#: selection:pe.cpe,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Cancelled Invoice"
+msgstr "Factura cancelada"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_company__pe_certificate_id
+msgid "Certificate"
+msgstr "Certificado"
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_certificate_menu
+msgid "Certificates"
+msgstr "Certificados"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__code
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__code
+msgid "Code"
+msgstr "Código"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_res_company
+msgid "Companies"
+msgstr "Compañias"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_condition_code
+msgid "Condition Code"
+msgstr "Código de condición"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Configuration Send Email for Document CPE"
+msgstr "Configuración Enviar correo electrónico de los documentos electrónicos"
+
+#. module: l10n_pe_cpe
+#: model:ir.module.category,name:l10n_pe_cpe.module_pe_cpe
+msgid "Configuration of Electronic Documents"
+msgstr "Configuración de Documentos Electrónicos"
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_cpe_configuration_menu
+msgid "Configurations"
+msgstr "Configuraciones"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Consulta de documento electronico"
+msgstr "Consulta de documento electrónico"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__create_uid
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__create_uid
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__create_date
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__create_date
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_invoice_refund
+msgid "Credit Note"
+msgstr "Rectificativa"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_credit_note_code
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_refund__pe_credit_note_code
+msgid "Credit Note Code"
+msgstr "Código de Nota de Crédito"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "DOC. NACIONAL DE IDENTIDAD"
+msgstr "Documento Nacional de Identidad"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "DOC.TRIB.NO.DOM.SIN.RUC"
+msgstr "Documento Tributario no Domiciliado sin RUC"
+
+#. module: l10n_pe_cpe
+#: selection:pe.cpe,type:0
+msgid "Daily Summary"
+msgstr "Resumen diario"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_debit_note_code
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_refund__pe_debit_note_code
+msgid "Dedit Note Code"
+msgstr "Código de Nota de Débito"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page_reponse
+msgid "Descargar XML"
+msgstr "Descargar archivo XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_digest
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__digest
+msgid "Digest"
+msgstr "Resumen"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Digest value..."
+msgstr "Valor de Resumen..."
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.invoice_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Digest value:"
+msgstr "Valor de Resumen:"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_amount_discount
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_total_discount_tax
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__display_name
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__display_name
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_doc_name
+msgid "Document Name"
+msgstr "Nombre del documento"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Document Status"
+msgstr "Estado del documento"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Documento del Receptor"
+msgstr "Documento del receptor"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+#: selection:pe.cpe,state:0
+msgid "Done"
+msgstr "Realizado"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+#: selection:pe.cpe,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Draft Invoice"
+msgstr "Factura borrador"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page_reponse
+msgid "El documento solicitado no ha sido encontrado"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_cpe_document_menu
+msgid "Electronic Documents"
+msgstr "Documentos Electrónicos"
+
+#. module: l10n_pe_cpe
+#: model:ir.actions.act_window,name:l10n_pe_cpe.action_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Electronic Payment Voucher"
+msgstr "Comprobante de pago electrónico"
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_cpe_menu
+msgid "Electronic Vouchers"
+msgstr "Comprobantes Electrónicos"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Electronic voucher details"
+msgstr "Detalle del Comprobante Electrónico"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__date_end
+msgid "End Date"
+msgstr "Fecha finalización"
+
+#. module: l10n_pe_cpe
+#: model:ir.actions.server,name:l10n_pe_cpe.invoice_auto_send_ir_actions_server
+#: model:ir.cron,cron_name:l10n_pe_cpe.invoice_auto_send
+#: model:ir.cron,name:l10n_pe_cpe.invoice_auto_send
+msgid "Envio Automatico Facturas/Boletas/Notas"
+msgstr "Envío Automático de Facturas, Boletas y Notas"
+
+#. module: l10n_pe_cpe
+#: model:ir.actions.server,name:l10n_pe_cpe.ra_auto_send_ir_actions_server
+#: model:ir.cron,cron_name:l10n_pe_cpe.ra_auto_send
+#: model:ir.cron,name:l10n_pe_cpe.ra_auto_send
+msgid "Envio Automatico de Baja"
+msgstr "Envío Automático de Baja"
+
+#. module: l10n_pe_cpe
+#: model:ir.actions.server,name:l10n_pe_cpe.sync_auto_send_ir_actions_server
+#: model:ir.cron,cron_name:l10n_pe_cpe.sync_auto_send
+#: model:ir.cron,name:l10n_pe_cpe.sync_auto_send
+msgid "Envio Automatico de Facturas/Notas"
+msgstr "Envío Automático de Facturas y Notas"
+
+#. module: l10n_pe_cpe
+#: model:ir.actions.server,name:l10n_pe_cpe.rc_auto_send_ir_actions_server
+#: model:ir.cron,cron_name:l10n_pe_cpe.rc_auto_send
+#: model:ir.cron,name:l10n_pe_cpe.rc_auto_send
+msgid "Envio Automatico de Resumen"
+msgstr "Envío Automático de Resumen"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_error_code
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__error_code
+msgid "Error Code"
+msgstr "Código de error"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_exonerated_amount
+msgid "Exonerated Operations"
+msgstr "Operaciones Exoneradas"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_export_amount
+msgid "Export Amount"
+msgstr "Monto de exportación"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "FACTURA ELECTRONICA"
+msgstr "FACTURA ELECTRÓNICA"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_free_amount
+msgid "Free Operations"
+msgstr "Operaciones Libres"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Generate"
+msgstr "Generar"
+
+#. module: l10n_pe_cpe
+#: selection:pe.cpe,state:0
+msgid "Generated"
+msgstr "Generado"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__id
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__id
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,help:l10n_pe_cpe.field_res_config_settings__include_ubl_attachment_in_invoice_email
+msgid "If active, the UBL Invoice XML file will be included in the attachments when sending the invoice by email."
+msgstr "Si está activado, el archivo XML será incluido en el envio de correo electrónico al cliente"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__include_ubl_attachment_in_invoice_email
+msgid "Include UBL XML in Invoice Email"
+msgstr "Incluir el archivo XML en el correo electrónico"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Include the UBL XML in the attachments when sending the invoice by email."
+msgstr "Incluir el archivo XML en el correo electrónico"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_invoice
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__invoice_id
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__invoice_id
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_invoice_date
+msgid "Invoice Date Time"
+msgstr "Fecha y hora de Factura"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Invoice In Payment"
+msgstr "En proceso de pago"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Detalle de Factura"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_invoice_code
+msgid "Invoice Type Code"
+msgstr "Código de tipo de Factura"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Invoice open"
+msgstr "Abierto"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Invoice paid"
+msgstr "Pagado"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__invoice_ids
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__is_voided
+msgid "Is Boided"
+msgstr "Está anulado"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__is_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_journal__is_cpe
+msgid "Is CPE"
+msgstr "Es CPE"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_company__pe_is_sync
+msgid "Is Synchronous"
+msgstr "Es síncrono"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_journal__is_homologation
+msgid "Is homologation"
+msgstr "Homologación"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_journal__is_synchronous
+msgid "Is synchronous"
+msgstr "Es síncrono"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property____last_update
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total____last_update
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__write_uid
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__write_uid
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__write_date
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__write_date
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_license_plate
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_line__pe_license_plate
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_sale_order__pe_license_plate
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_sale_order_line__pe_license_plate
+msgid "License Plate"
+msgstr "Placa vehicular"
+
+#. module: l10n_pe_cpe
+#: selection:pe.cpe,type:0
+msgid "Low communication"
+msgstr "Comunicación de Baja"
+
+#. module: l10n_pe_cpe
+#: model:res.groups,name:l10n_pe_cpe.group_pe_cpe_manager
+msgid "Manager"
+msgstr "Jefe de Área"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "NOTA DE CREDITO ELECTRONICA - BOLETA/FACTURA"
+msgstr "NOTA DE CRÉDITO ELECTRÓNICA DE BOLETA DE FACTURA"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "NOTA DE DEBITO ELECTRONICA - BOLETA/FACTURA"
+msgstr "NOTA DE DÉBITO ELECTRÓNICA DE BOLETAS Y FACTURAS"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__name
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__name
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__note
+msgid "Note"
+msgstr "Nota"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Numero de Documento"
+msgstr "Número de documento"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Numero del Comprobante"
+msgstr "Número de comprobante"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Numero del Comprobante ejemplo F001-0005, F001-6"
+msgstr "Número del combrobante, ejemplo F001-0005, F001-6"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__post_sunat
+msgid "Only post SUNAT"
+msgstr "Solo los que han sido enviados a SUNAT"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__only_today
+msgid "Only today"
+msgstr "Solo los documentos del día"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Only today."
+msgstr "Solo los documentos del día de emisión."
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__state_invoice_open
+msgid "Open"
+msgstr "Abierto"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__origin_doc_code
+msgid "Origin Document Code"
+msgstr "Código del documento origen"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__origin_doc_number
+msgid "Origin Document Number"
+msgstr "Número del documento origen"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "PASAPORTE"
+msgstr "Pasaporte"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "PRO-FORMA"
+msgstr "PROFORMA"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__payable_amount
+msgid "Payable Amount"
+msgstr "Monto a pagar"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__sunat_pdf417_code
+msgid "Pdf 417 Code"
+msgstr "Código PDF 417"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__percent
+msgid "Percent"
+msgstr "Porcentaje"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.invoice_view_form
+msgid "Peruvian Customization"
+msgstr "Personalización peruana"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_tax_form
+msgid "Peruvian Settings"
+msgstr "Personalización peruana"
+
+#. module: l10n_pe_cpe
+#: model:res.groups,name:l10n_pe_cpe.group_plate_invoice
+msgid "Plate in Invoice/Sale"
+msgstr "Placa vehicular en Facturas de ventas"
+
+#. module: l10n_pe_cpe
+#: model:res.groups,name:l10n_pe_cpe.group_plate_invoice_line
+msgid "Plate in Invoice/Sale Line"
+msgstr "Placa vehicular en lineas de Facturas de ventas"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Post send sunat"
+msgstr "Enviar solo los enviados a SUNAT"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Post send to SUNAT."
+msgstr "Enviar solo los enviados a SUNAT"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de Producto"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__sunat_qr_code
+msgid "QR Code"
+msgstr "Código QR"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "REG. UNICO DE CONTRIBUYENTES"
+msgstr "Registro Único de Contribuyentes"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "RUC Emisor"
+msgstr "RUC del emisor"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "RUC del Emisor"
+msgstr "RUC del emisor"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__reference_amount
+msgid "Reference Amount"
+msgstr "Monto de referencia"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Refund"
+msgstr "Reembolso"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Representacion impresa de:"
+msgstr "Representación impresa de:"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_product_product__require_plate
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_product_template__require_plate
+msgid "Require Plate"
+msgstr "Requiere Placa vehicular"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_company__sunat_resolution_number
+msgid "Resolution Number"
+msgstr "Número de Resolución"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_company__sunat_resolution_type
+msgid "Resolution Type"
+msgstr "Tipo de Resolución"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_response
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__response
+msgid "Response"
+msgstr "Respuesta"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__response_code
+msgid "Response Code"
+msgstr "Código de respuesta"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "SIN DOCUMENTO"
+msgstr "Sin documento"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_cpe_id
+msgid "SUNAT CPE"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_sunat_transaction
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_sunat_transaction51
+msgid "SUNAT Transaction"
+msgstr "Transacción en SUNAT"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_sale_order
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_sale_advance_payment_inv
+msgid "Sales Advance Payment Invoice"
+msgstr "Ventas. Anticipo pago factura"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de Pedido de Venta"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+#: selection:pe.cpe,state:0
+msgid "Send"
+msgstr "Enviar"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__send_date
+msgid "Send Date"
+msgstr "Fecha de envío"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__send_email
+msgid "Send email"
+msgstr "Enviar por Correo electrónico"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_company__pe_cpe_server_id
+msgid "Server"
+msgstr "Servidor"
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_server_menu
+msgid "Servers"
+msgstr "Servidores"
+
+#. module: l10n_pe_cpe
+#: model:ir.module.category,description:l10n_pe_cpe.module_pe_cpe
+msgid "Set up electronic payment vouchers"
+msgstr "Configurar comprobantes de pago electrónico"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_signature
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__signature
+msgid "Signature"
+msgstr "Firma"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Signature value..."
+msgstr "Valor de firma..."
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.invoice_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Signature value:"
+msgstr "Valor de firma"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "States Invoice"
+msgstr "Estados de los documentos"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_invoice_state
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Status invoice for send to Customer"
+msgstr "Estados de los documentos a enviar a cliente"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_summary_id
+msgid "Summary Document"
+msgstr "Resumen de documentos"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__summary_ids
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Summary Invoices"
+msgstr "Resumen de facturas"
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_cpe_datas_menu
+msgid "Sunat Datas"
+msgstr "Datos SUNAT"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_note
+msgid "Sunat Note"
+msgstr "Nota SUNAT"
+
+#. module: l10n_pe_cpe
+#: selection:pe.cpe,type:0
+msgid "Synchronous"
+msgstr "Síncrono"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_account_tax
+msgid "Tax"
+msgstr "Impuesto"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_tax__pe_tax_code
+msgid "Tax Code"
+msgstr "Código de Impuesto"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_tax__pe_tax_type
+msgid "Tax Type"
+msgstr "Tipo de Impuesto"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_taxable_amount
+msgid "Taxable Operations"
+msgstr "Operaciones gravables"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "Template for email document CPE"
+msgstr "Plantilla para el envío de Correo electrónico"
+
+#. module: l10n_pe_cpe
+#: code:addons/l10n_pe_cpe/models/cpe.py:889
+#: code:addons/l10n_pe_cpe/models/cpe.py:945
+#, python-format
+msgid "The invoice N° %s must be sent to the sunat to generate this document."
+msgstr "La factura N° %s debe enviarse a SUNAT para generar este documento"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,help:l10n_pe_cpe.field_product_product__require_plate
+#: model:ir.model.fields,help:l10n_pe_cpe.field_product_template__require_plate
+msgid "This Product Requires Vehicle License Plate"
+msgstr "El proucto requiere Placa Vehicular"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__ticket
+msgid "Ticket"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.cpe_page
+msgid "Tipo de Comprobante"
+msgstr "Tipo de comprobante"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_total__total_amount
+msgid "Total Amount"
+msgstr "Importe total"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_total_discount
+msgid "Total Discount"
+msgstr "Descuento total"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_line__pe_tier_range
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_tax__pe_tier_range
+msgid "Type of System"
+msgstr "Tipo de sistema"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_line__pe_affectation_code
+msgid "Type of affectation"
+msgstr "Tipo de afectación"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,help:l10n_pe_cpe.field_account_invoice_line__pe_affectation_code
+msgid "Type of affectation to the IGV"
+msgstr "Tipo de afectación por IGV"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,help:l10n_pe_cpe.field_account_invoice_line__pe_tier_range
+#: model:ir.model.fields,help:l10n_pe_cpe.field_account_tax__pe_tier_range
+msgid "Type of system to the ISC"
+msgstr "Tipo de sistema al ISC"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_unaffected_amount
+msgid "Unaffected Operations"
+msgstr "Operaciones Inafectas"
+
+#. module: l10n_pe_cpe
+#: model:res.groups,name:l10n_pe_cpe.group_pe_cpe_user
+msgid "User"
+msgstr "Usuario"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice_additional_property__value
+msgid "Value"
+msgstr "Valor"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Vendor Bill"
+msgstr "Factura de proveedor"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.report_invoice_document
+msgid "Vendor Refund"
+msgstr "Reembolso del vendedor"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_account_invoice__pe_voided_id
+msgid "Voided Document"
+msgstr "Documento anulado"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__voided_ids
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Voided Invoices"
+msgstr "Facturas anuladas"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "Wait"
+msgstr "Espere"
+
+#. module: l10n_pe_cpe
+#: selection:pe.cpe,state:0
+msgid "Waiting"
+msgstr "Esperando"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas
+msgid "XML Data"
+msgstr "Data XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__xml_document
+msgid "XML Document"
+msgstr "Documento XML"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "XML Document..."
+msgstr "Documento XML..."
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_fname
+msgid "XML File Name"
+msgstr "Nombre del archivo XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_response
+msgid "XML Response Data"
+msgstr "Data de la respuesta XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_response_fname
+msgid "XML Response File Name"
+msgstr "Nombre del archivo XML respuesta"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_sign
+msgid "XML Sign Data"
+msgstr "Data Sign XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_sign_fname
+msgid "XML Sign File Name"
+msgstr "Nombre de archivo sign XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_zip
+msgid "XML Zip Data"
+msgstr "Data zip XML"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_pe_cpe__datas_zip_fname
+msgid "XML Zip File Name"
+msgstr "Nombre archivo zip XML"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.view_pe_sunat_cpe_from
+msgid "XML details"
+msgstr "Detalle XML"
+
+#. module: l10n_pe_cpe
+#: code:addons/l10n_pe_cpe/models/pe_cpe.py:64
+#, python-format
+msgid "You can only delete sent documents."
+msgstr "Solo puedes borrar los documentos enviados."
+
+#. module: l10n_pe_cpe
+#: model:ir.ui.menu,name:l10n_pe_cpe.pe_cpe_menu_root
+msgid "eDocuments"
+msgstr "eDocumentos"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__state_invoice_in_payment
+msgid "in_payment"
+msgstr "En proceso de pago"
+
+#. module: l10n_pe_cpe
+#: model_terms:ir.ui.view,arch_db:l10n_pe_cpe.res_config_settings_view_form_send_email
+msgid "only today"
+msgstr "Solo los del dia"
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__state_invoice_paid
+msgid "paid"
+msgstr "Pagado"
+
+#. module: l10n_pe_cpe
+#: model:ir.model,name:l10n_pe_cpe.model_pe_cpe
+msgid "pe.cpe"
+msgstr ""
+
+#. module: l10n_pe_cpe
+#: model:ir.model.fields,field_description:l10n_pe_cpe.field_res_config_settings__def_template_cpe_id
+msgid "template CPE"
+msgstr "Plantilla de documento electrónico"
+

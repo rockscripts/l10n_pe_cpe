@@ -1,0 +1,140 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="view_pe_sunat_cpe_tree">
+      <field name="name">pe.cpe.tree</field>
+      <field name="model">pe.cpe</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="type"/>
+		  <field name="date"/>
+		  <field name="response"/>
+		  <field name="error_code"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_pe_sunat_cpe_from" model="ir.ui.view">
+        <field name="name">pe.cpe.form</field>
+        <field name="model">pe.cpe</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                 	<button name="action_draft" string="Draft" states="generate,cancel" type="object" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                 	<button name="action_generate" string="Generate" states="draft" type="object" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                 	<button name="action_send" string="Send" states="generate" type="object" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                 	<button name="action_verify" string="Wait" states="send" type="object" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                 	<button name="action_done" string="Done" states="verify" type="object" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                 	<button name="action_document_status" string="Document Status" 
+                 	attrs="{'invisible': [('type','in',('rc', 'ra')),('state','not in', ('generate','send','verify'))]}" 
+                    type="object" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                 	<button name="action_cancel" string="Cancel" type="object" states="draft,generate,send,verify" groups="l10n_pe_cpe.group_pe_cpe_accountant" />
+                  <field name="state" widget="statusbar" statusbar_visible="draft,generate,send"/>
+                </header>
+                <sheet string="Electronic Payment Voucher">
+                	<h1 class="mt0">
+                		<field name="name" readonly="1" class="oe_inline" attrs="{'invisible': [('state','in',('draft','generate'))]}"/>
+                	</h1>
+                	<group>
+                		<group>
+                			<field name="type" attrs="{'readonly': [('state','not in',('draft'))]}" />
+                			<field name="error_code" />
+                			<field name="response" />
+                		</group>
+                		<group>
+                			<field name="date" attrs="{'readonly': [('state','not in',('draft'))]}" />
+                			<field name="send_date" attrs="{'readonly': [('state','not in',('draft'))]}" />
+                			<field name="date_end" attrs="{'readonly': [('state','not in',('draft'))]}" />
+                			<field name="ticket" attrs="{'invisible': [('type','not in',('ra', 'rc'))]}"/>
+                			<field name="company_id" options="{'no_create': True}" groups="base.group_multi_company" />
+                		</group>
+                	</group>
+                	<notebook colspan="4">
+                		<page string="Electronic voucher details">
+                			<group>
+                				<group>
+                					<field name="datas" filename="datas_fname"/>
+	                				<field name="datas_fname" invisible="1" class="oe_inline oe_right"/>
+	                				<field name="datas_sign" filename="datas_sign_fname"/>
+	                				<field name="datas_sign_fname" invisible="1" class="oe_inline oe_right"/>
+                				</group>
+                				<group>
+                					<field name="datas_zip" filename="datas_zip_fname"/>
+	                				<field name="datas_zip_fname" invisible="1" class="oe_inline oe_right"/>
+	                				<field name="datas_response" filename="datas_response_fname"/>
+	                				<field name="datas_response_fname" invisible="1" class="oe_inline oe_right"/>
+                				</group>
+                			</group>
+                			<div>
+                				<label for="digest_value" string="Digest value:" />
+                				<field name="digest" placeholder="Digest value..." />
+                			</div>
+                			<div>
+                				<label for="signature_value" string="Signature value:" />
+                			</div>
+                			<div>
+                				<field name="signature" placeholder="Signature value..."/>
+                			</div>
+                			<div>
+                				<label for="additional_notes" string="Additional notes:" />
+                			</div>
+                			<div>
+                				<field name="note" placeholder="Additional notes..."/>
+                            </div>
+                		</page>
+                		<page string="XML details">
+                			<div>
+                				<field name="xml_document" placeholder="XML Document..." attrs="{'readonly': [('state','not in',('draft'))]}"  />
+                			</div>
+                		</page>
+                		<page string="Invoices" attrs="{'invisible': [('type','not in',('sync'))]}">
+                			<field name="invoice_ids" attrs="{'readonly': [('state','not in',('draft'))]}" >
+                				
+                			</field>
+                		</page>
+                		<page string="Voided Invoices" attrs="{'invisible': [('type','not in',('ra'))]}">
+                			<field name="voided_ids" attrs="{'readonly': [('state','not in',('draft'))]}" >
+                				
+                			</field>
+                		</page>
+                		<page string="Summary Invoices" attrs="{'invisible': [('type','not in',('rc'))]}">
+                			<field name="summary_ids" attrs="{'readonly': [('state','not in',('draft'))]}" >
+                				
+                			</field>
+                		</page>
+                		
+                	</notebook>
+                </sheet>
+                
+            </form>
+        </field>
+    </record>
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_pe_cpe">
+      <field name="name">Electronic Payment Voucher</field>
+      <field name="res_model">pe.cpe</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem name="eDocuments" id="pe_cpe_menu_root" />
+    
+    <menuitem name="Configurations" id="pe_cpe_configuration_menu" parent="pe_cpe_menu_root" sequence="100" />
+    
+    <menuitem name="Sunat Datas" id="pe_cpe_datas_menu" parent="pe_cpe_configuration_menu"
+              action="l10n_pe_datas.action_pe_datas" sequence="2" />
+
+    <menuitem name="Electronic Documents" id="pe_cpe_document_menu" parent="pe_cpe_menu_root" 
+    sequence="1"  />
+    
+    <menuitem name="Electronic Vouchers" id="pe_cpe_menu" parent="pe_cpe_document_menu"
+      action="action_pe_cpe" sequence="1" />
+
+    <menuitem name="Servers" id="pe_server_menu" parent="pe_cpe_configuration_menu"
+      action="l10n_pe_server.action_pe_server" sequence="3" />
+
+    <menuitem name="Certificates" id="pe_certificate_menu" parent="pe_cpe_configuration_menu"
+      action="l10n_pe_certificate.action_pe_certificate" sequence="4" />
+
+  </data>
+</odoo>
