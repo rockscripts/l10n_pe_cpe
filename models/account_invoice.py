@@ -106,7 +106,7 @@ class AccountInvoice(models.Model):
 
     def _get_payment_means_code(self):
         return self.env['pe.datas'].get_selection('PE.CPE.CATALOG59')
-    sunat_payment_means_code = fields.Selection( selection='_get_payment_means_code', string="Método del pago", default="999" )
+    sunat_payment_means_code = fields.Selection( selection='_get_payment_means_code', string="Método del pago" )
 
     def _get_payment_means_id(self):
         for record in self:
