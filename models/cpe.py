@@ -578,7 +578,12 @@ class CPE:
         # 2:credito
         PaymentMeans = etree.SubElement( self._root, PaymentMeans.text, nsmap={'cac': PaymentMeans.namespace} )
         PaymentMeansCode = etree.SubElement( PaymentMeans, PaymentMeansCode.text, nsmap={'cbc': PaymentMeansCode.namespace} )
-        PaymentMeansCode.text = str( invoice_id.sunat_payment_means_code )
+        
+        if( invoice_id.sunat_payment_means_code ):
+            PaymentMeansCode.text = str( invoice_id.sunat_payment_means_code )
+        else:
+            PaymentMeansCode.text = str( '999' ) 
+            
         PaymentID = etree.SubElement( PaymentMeans, PaymentID.text, nsmap={'cbc': PaymentID.namespace} )
         if( invoice_id.sunat_payment_means_id ):
             PaymentID.text = str( invoice_id.sunat_payment_means_id )
