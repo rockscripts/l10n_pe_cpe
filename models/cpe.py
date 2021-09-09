@@ -541,8 +541,7 @@ class CPE:
         lineExtensionAmount.text = str(round(sumLineExtensionAmount, 2))
 
         taxInclusiveAmountTag = etree.QName(self._cbc, 'TaxInclusiveAmount')
-        taxInclusiveAmount = etree.SubElement( total, taxInclusiveAmountTag.text, currencyID=invoice_id.currency_id.name, nsmap={'cbc': taxInclusiveAmountTag.namespace} )
-        raise UserError(float(self.get_tax_amount(invoice_id)))
+        taxInclusiveAmount = etree.SubElement( total, taxInclusiveAmountTag.text, currencyID=invoice_id.currency_id.name, nsmap={'cbc': taxInclusiveAmountTag.namespace} )       
         totalInclusiveAmount = float(sumLineExtensionAmount) + float(self.get_tax_amount(invoice_id))
         taxInclusiveAmount.text = str(round(totalInclusiveAmount, 2))
 
